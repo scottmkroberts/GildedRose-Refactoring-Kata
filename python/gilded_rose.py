@@ -38,14 +38,15 @@ class GildedRose(object):
     def _adjust_quality_for_today(self, item: Item) -> None:
         """Apply today's quality change, using today's (pre-decrement) sell_in."""
         if item.name not in INCREASING_QUALITY_ITEMS:
-            degrade_amount = (
-                CONJURED_DEGRADE_AMOUNT
-                if item.name == CONJURED
-                else NORMAL_DEGRADE_AMOUNT
-            )
-            item.quality = max(MIN_QUALITY, item.quality - degrade_amount)
+            item.quality = max(MIN_QUALITY, item.quality - self._degrade_amount(item))
         else:
             item.quality = min(MAX_QUALITY, item.quality + self._increase_amount(item))
+
+    def _degrade_amount(self, item: Item) -> int:
+        """How much quality should degrade today for a non-appreciating item."""
+        if item.name == CONJURED:
+            return CONJURED_DEGRADE_AMOUNT
+        return NORMAL_DEGRADE_AMOUNT
 
     def _increase_amount(self, item: Item) -> int:
         """How much quality should increase today for an appreciating item."""
