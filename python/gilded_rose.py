@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from item_names import AGED_BRIE, BACKSTAGE_PASSES, INCREASING_QUALITY_ITEMS, SULFURAS
 
+MIN_QUALITY = 0
 MAX_QUALITY = 50
 TEN_DAYS_OR_LESS = 10
 FIVE_DAYS_OR_LESS = 5
@@ -26,7 +27,7 @@ class GildedRose(object):
     def _adjust_quality_for_today(self, item: Item) -> None:
         """Apply today's quality change, using today's (pre-decrement) sell_in."""
         if item.name not in INCREASING_QUALITY_ITEMS:
-            if item.quality > 0:
+            if item.quality > MIN_QUALITY:
                 item.quality = item.quality - 1
         else:
             if item.quality < MAX_QUALITY:
@@ -46,7 +47,7 @@ class GildedRose(object):
         if item.sell_in < 0:
             if item.name != AGED_BRIE:
                 if item.name != BACKSTAGE_PASSES:
-                    if item.quality > 0:
+                    if item.quality > MIN_QUALITY:
                         item.quality = item.quality - 1
                 else:
                     item.quality = item.quality - item.quality
