@@ -15,30 +15,42 @@ class GildedRose(object):
         for item in self.items:
             if item.name == SULFURAS:
                 continue
-            if item.name != AGED_BRIE and item.name != BACKSTAGE_PASSES:
-                if item.quality > 0:
-                    item.quality = item.quality - 1
+            self._adjust_quality_for_today(item)
+            self._advance_sell_in(item)
+            self._adjust_quality_if_past_due(item)
+
+    def _adjust_quality_for_today(self, item: Item) -> None:
+        """Apply today's quality change, using today's (pre-decrement) sell_in."""
+        if item.name != AGED_BRIE and item.name != BACKSTAGE_PASSES:
+            if item.quality > 0:
+                item.quality = item.quality - 1
+        else:
+            if item.quality < 50:
+                item.quality = item.quality + 1
+                if item.name == BACKSTAGE_PASSES:
+                    if item.sell_in < 11:
+                        if item.quality < 50:
+                            item.quality = item.quality + 1
+                    if item.sell_in < 6:
+                        if item.quality < 50:
+                            item.quality = item.quality + 1
+
+    def _advance_sell_in(self, item: Item) -> None:
+        """Age the item by one day."""
+        item.sell_in = item.sell_in - 1
+
+    def _adjust_quality_if_past_due(self, item: Item) -> None:
+        """Apply the extra adjustment once the item's sell-by date has passed."""
+        if item.sell_in < 0:
+            if item.name != AGED_BRIE:
+                if item.name != BACKSTAGE_PASSES:
+                    if item.quality > 0:
+                        item.quality = item.quality - 1
+                else:
+                    item.quality = item.quality - item.quality
             else:
                 if item.quality < 50:
                     item.quality = item.quality + 1
-                    if item.name == BACKSTAGE_PASSES:
-                        if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
-            item.sell_in = item.sell_in - 1
-            if item.sell_in < 0:
-                if item.name != AGED_BRIE:
-                    if item.name != BACKSTAGE_PASSES:
-                        if item.quality > 0:
-                            item.quality = item.quality - 1
-                    else:
-                        item.quality = item.quality - item.quality
-                else:
-                    if item.quality < 50:
-                        item.quality = item.quality + 1
 
 
 class Item:
