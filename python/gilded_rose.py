@@ -29,7 +29,7 @@ class GildedRose(object):
             if item.name in LEGENDARY_ITEMS:
                 continue
             self._adjust_quality_for_today(item)
-            self._advance_sell_in(item)
+            self._decrement_sell_by_date(item)
             self._adjust_quality_if_past_due(item)
 
     def _adjust_quality_for_today(self, item: Item) -> None:
@@ -50,7 +50,7 @@ class GildedRose(object):
                     if item.sell_in <= FIVE_DAYS_OR_LESS and item.quality < MAX_QUALITY:
                         item.quality = item.quality + 1
 
-    def _advance_sell_in(self, item: Item) -> None:
+    def _decrement_sell_by_date(self, item: Item) -> None:
         """Age the item by one day."""
         item.sell_in = item.sell_in - 1
 
