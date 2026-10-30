@@ -43,27 +43,27 @@ class GildedRose(object):
             item.quality = max(MIN_QUALITY, item.quality - degrade_amount)
         else:
             if item.quality < MAX_QUALITY:
-                item.quality = item.quality + 1
+                item.quality += 1
                 if item.name == BACKSTAGE_PASSES:
                     if item.sell_in <= TEN_DAYS_OR_LESS and item.quality < MAX_QUALITY:
-                        item.quality = item.quality + 1
+                        item.quality += 1
                     if item.sell_in <= FIVE_DAYS_OR_LESS and item.quality < MAX_QUALITY:
-                        item.quality = item.quality + 1
+                        item.quality += 1
 
     def _decrement_sell_by_date(self, item: Item) -> None:
         """Age the item by one day."""
-        item.sell_in = item.sell_in - 1
+        item.sell_in -= 1
 
     def _adjust_quality_if_past_due(self, item: Item) -> None:
         """Apply the extra adjustment once the item's sell-by date has passed."""
         if self._is_past_sell_by_date(item):
             if item.name == AGED_BRIE:
                 if item.quality < MAX_QUALITY:
-                    item.quality = item.quality + 1
+                    item.quality += 1
             elif item.name == BACKSTAGE_PASSES:
-                item.quality = item.quality - item.quality
+                item.quality = 0
             elif item.quality > MIN_QUALITY:
-                item.quality = item.quality - 1
+                item.quality -= 1
 
     def _is_past_sell_by_date(self, item: Item) -> bool:
         """Whether the item's sell_in has already gone negative."""
