@@ -4,6 +4,8 @@ from __future__ import annotations
 from item_names import AGED_BRIE, BACKSTAGE_PASSES, INCREASING_QUALITY_ITEMS, SULFURAS
 
 MAX_QUALITY = 50
+TEN_DAYS_OR_LESS = 10
+FIVE_DAYS_OR_LESS = 5
 
 
 class GildedRose(object):
@@ -30,9 +32,9 @@ class GildedRose(object):
             if item.quality < MAX_QUALITY:
                 item.quality = item.quality + 1
                 if item.name == BACKSTAGE_PASSES:
-                    if item.sell_in < 11 and item.quality < MAX_QUALITY:
+                    if item.sell_in <= TEN_DAYS_OR_LESS and item.quality < MAX_QUALITY:
                         item.quality = item.quality + 1
-                    if item.sell_in < 6 and item.quality < MAX_QUALITY:
+                    if item.sell_in <= FIVE_DAYS_OR_LESS and item.quality < MAX_QUALITY:
                         item.quality = item.quality + 1
 
     def _advance_sell_in(self, item: Item) -> None:
