@@ -123,11 +123,27 @@ def test_backstage_pass_quality_stays_zero_after_concert(backstage_pass_after_co
 
 
 def test_conjured_items_degrade_twice_as_fast(conjured_mana_cake):
-    # Not yet implemented: gilded_rose.py currently has no special case for
-    # Conjured items, so this fails (-1/day like a normal item) until that
-    # rule is added.
     quality_before = conjured_mana_cake.quality
 
     GildedRose([conjured_mana_cake]).update_quality()
 
     assert conjured_mana_cake.quality == quality_before - 2
+
+
+def test_unknown_item_degrades_like_a_normal_item(unknown_item):
+    # Anything not recognized as Legendary, Conjured, or an increasing-quality
+    # item should fail open into the generic degrade path rather than
+    # erroring or being silently treated as special.
+    quality_before = unknown_item.quality
+
+    GildedRose([unknown_item]).update_quality()
+
+    assert unknown_item.quality == quality_before - 1
+
+
+def test_empty_item_list_does_not_raise():
+    gilded_rose = GildedRose([])
+
+    gilded_rose.update_quality()
+
+    assert gilded_rose.items == []

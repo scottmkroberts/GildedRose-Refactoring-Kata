@@ -95,6 +95,11 @@ def conjured_mana_cake():
 
 
 @pytest.fixture
+def unknown_item():
+    return Item(name="Unknown Item", sell_in=5, quality=10)
+
+
+@pytest.fixture
 def approved_items(
     vest,
     aged_brie,
