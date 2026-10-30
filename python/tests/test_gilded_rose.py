@@ -30,3 +30,14 @@ def test_quality_never_negative(vest_at_floor, elixir_past_due_near_floor):
     GildedRose(items).update_quality()
     for item in items:
         assert item.quality >= 0
+
+
+def test_sell_in_and_quality_decrease_by_one_for_normal_items(vest, elixir):
+    items = [vest, elixir]
+    before = [(item.sell_in, item.quality) for item in items]
+
+    GildedRose(items).update_quality()
+
+    for item, (sell_in_before, quality_before) in zip(items, before):
+        assert item.sell_in == sell_in_before - 1
+        assert item.quality == quality_before - 1
