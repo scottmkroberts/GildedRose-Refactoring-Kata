@@ -76,3 +76,47 @@ def test_aged_brie_past_sell_by_date_currently_doubles_increase(aged_brie_past_d
     GildedRose([aged_brie_past_due]).update_quality()
 
     assert aged_brie_past_due.quality == quality_before + 2
+
+
+def test_backstage_pass_quality_increases_by_one_when_far_from_concert(
+    backstage_pass_15_days,
+):
+    quality_before = backstage_pass_15_days.quality
+
+    GildedRose([backstage_pass_15_days]).update_quality()
+
+    assert backstage_pass_15_days.quality == quality_before + 1
+
+
+def test_backstage_pass_quality_increases_by_two_within_ten_days(
+    backstage_pass_10_days_with_room,
+):
+    quality_before = backstage_pass_10_days_with_room.quality
+
+    GildedRose([backstage_pass_10_days_with_room]).update_quality()
+
+    assert backstage_pass_10_days_with_room.quality == quality_before + 2
+
+
+def test_backstage_pass_quality_increases_by_three_within_five_days(
+    backstage_pass_5_days_with_room,
+):
+    quality_before = backstage_pass_5_days_with_room.quality
+
+    GildedRose([backstage_pass_5_days_with_room]).update_quality()
+
+    assert backstage_pass_5_days_with_room.quality == quality_before + 3
+
+
+def test_backstage_pass_quality_drops_to_zero_after_concert(
+    backstage_pass_day_of_concert,
+):
+    GildedRose([backstage_pass_day_of_concert]).update_quality()
+
+    assert backstage_pass_day_of_concert.quality == 0
+
+
+def test_backstage_pass_quality_stays_zero_after_concert(backstage_pass_after_concert):
+    GildedRose([backstage_pass_after_concert]).update_quality()
+
+    assert backstage_pass_after_concert.quality == 0

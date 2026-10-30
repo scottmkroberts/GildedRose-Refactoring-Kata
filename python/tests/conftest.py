@@ -75,6 +75,34 @@ def backstage_pass_5_days():
 
 
 @pytest.fixture
+def backstage_pass_10_days_with_room():
+    return Item(
+        name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=20
+    )
+
+
+@pytest.fixture
+def backstage_pass_5_days_with_room():
+    return Item(
+        name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=20
+    )
+
+
+@pytest.fixture
+def backstage_pass_day_of_concert():
+    return Item(
+        name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=20
+    )
+
+
+@pytest.fixture
+def backstage_pass_after_concert():
+    return Item(
+        name="Backstage passes to a TAFKAL80ETC concert", sell_in=-1, quality=0
+    )
+
+
+@pytest.fixture
 def conjured_mana_cake():
     return Item(name="Conjured Mana Cake", sell_in=3, quality=6)
 
