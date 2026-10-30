@@ -66,8 +66,7 @@ class GildedRose(object):
         """Apply the extra adjustment once the item's sell-by date has passed."""
         if self._is_past_sell_by_date(item):
             if item.name == AGED_BRIE:
-                if item.quality < MAX_QUALITY:
-                    item.quality += 1
+                item.quality = min(MAX_QUALITY, item.quality + 1)
             elif item.name == BACKSTAGE_PASSES:
                 item.quality = 0
             elif item.quality > MIN_QUALITY:
