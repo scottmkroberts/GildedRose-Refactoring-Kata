@@ -14,6 +14,11 @@ def aged_brie():
 
 
 @pytest.fixture
+def aged_brie_at_cap():
+    return Item(name="Aged Brie", sell_in=2, quality=50)
+
+
+@pytest.fixture
 def elixir():
     return Item(name="Elixir of the Mongoose", sell_in=5, quality=7)
 
