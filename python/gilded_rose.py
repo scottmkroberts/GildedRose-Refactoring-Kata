@@ -6,7 +6,7 @@ from item_names import (
     BACKSTAGE_PASSES,
     CONJURED,
     INCREASING_QUALITY_ITEMS,
-    SULFURAS,
+    LEGENDARY_ITEMS,
 )
 
 MIN_QUALITY = 0
@@ -26,7 +26,7 @@ class GildedRose(object):
     def update_quality(self) -> None:
         """Advance every item by one day, applying the shop's quality rules."""
         for item in self.items:
-            if item.name == SULFURAS:
+            if item.name in LEGENDARY_ITEMS:
                 continue
             self._adjust_quality_for_today(item)
             self._advance_sell_in(item)

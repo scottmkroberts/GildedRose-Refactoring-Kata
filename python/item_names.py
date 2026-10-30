@@ -7,3 +7,6 @@ CONJURED = "Conjured Mana Cake"
 
 # Items whose quality increases with age instead of decreasing.
 INCREASING_QUALITY_ITEMS = {AGED_BRIE, BACKSTAGE_PASSES}
+
+# Legendary items: never sold, never adjusted in any way.
+LEGENDARY_ITEMS = {SULFURAS}
