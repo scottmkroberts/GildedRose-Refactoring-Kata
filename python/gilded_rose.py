@@ -15,6 +15,9 @@ TEN_DAYS_OR_LESS = 10
 FIVE_DAYS_OR_LESS = 5
 NORMAL_DEGRADE_AMOUNT = 1
 CONJURED_DEGRADE_AMOUNT = 2
+BASE_INCREASE_AMOUNT = 1
+TEN_DAYS_OR_LESS_INCREASE_AMOUNT = 2
+FIVE_DAYS_OR_LESS_INCREASE_AMOUNT = 3
 
 
 class GildedRose(object):
@@ -42,13 +45,17 @@ class GildedRose(object):
             )
             item.quality = max(MIN_QUALITY, item.quality - degrade_amount)
         else:
-            if item.quality < MAX_QUALITY:
-                item.quality += 1
-                if item.name == BACKSTAGE_PASSES:
-                    if item.sell_in <= TEN_DAYS_OR_LESS and item.quality < MAX_QUALITY:
-                        item.quality += 1
-                    if item.sell_in <= FIVE_DAYS_OR_LESS and item.quality < MAX_QUALITY:
-                        item.quality += 1
+            item.quality = min(MAX_QUALITY, item.quality + self._increase_amount(item))
+
+    def _increase_amount(self, item: Item) -> int:
+        """How much quality should increase today for an appreciating item."""
+        if item.name != BACKSTAGE_PASSES:
+            return BASE_INCREASE_AMOUNT
+        if item.sell_in <= FIVE_DAYS_OR_LESS:
+            return FIVE_DAYS_OR_LESS_INCREASE_AMOUNT
+        if item.sell_in <= TEN_DAYS_OR_LESS:
+            return TEN_DAYS_OR_LESS_INCREASE_AMOUNT
+        return BASE_INCREASE_AMOUNT
 
     def _decrement_sell_by_date(self, item: Item) -> None:
         """Age the item by one day."""
