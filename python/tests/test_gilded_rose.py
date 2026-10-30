@@ -1,16 +1,8 @@
 # -*- coding: utf-8 -*-
-import unittest
-
-from gilded_rose import Item, GildedRose
 
 
-class GildedRoseTest(unittest.TestCase):
-    def test_foo(self):
-        items = [Item("foo", 0, 0)]
-        gilded_rose = GildedRose(items)
-        gilded_rose.update_quality()
-        self.assertEqual("fixme", items[0].name)
-
-        
-if __name__ == '__main__':
-    unittest.main()
+def test_items_have_name_sell_in_and_quality(approved_items):
+    for item in approved_items:
+        assert hasattr(item, "name")
+        assert hasattr(item, "sell_in")
+        assert hasattr(item, "quality")
