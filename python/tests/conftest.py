@@ -9,6 +9,11 @@ def vest():
 
 
 @pytest.fixture
+def vest_at_floor():
+    return Item(name="+5 Dexterity Vest", sell_in=10, quality=0)
+
+
+@pytest.fixture
 def aged_brie():
     return Item(name="Aged Brie", sell_in=2, quality=0)
 
@@ -21,6 +26,11 @@ def aged_brie_at_cap():
 @pytest.fixture
 def elixir():
     return Item(name="Elixir of the Mongoose", sell_in=5, quality=7)
+
+
+@pytest.fixture
+def elixir_past_due_near_floor():
+    return Item(name="Elixir of the Mongoose", sell_in=0, quality=1)
 
 
 @pytest.fixture

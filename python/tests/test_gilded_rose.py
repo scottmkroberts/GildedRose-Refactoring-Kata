@@ -23,3 +23,10 @@ def test_sulfuras_quality_stays_at_80(sulfuras_not_yet_due, sulfuras_past_due):
     GildedRose(items).update_quality()
     for item in items:
         assert item.quality == 80
+
+
+def test_quality_never_negative(vest_at_floor, elixir_past_due_near_floor):
+    items = [vest_at_floor, elixir_past_due_near_floor]
+    GildedRose(items).update_quality()
+    for item in items:
+        assert item.quality >= 0
