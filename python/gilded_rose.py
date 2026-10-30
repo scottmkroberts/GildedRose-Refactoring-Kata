@@ -56,7 +56,7 @@ class GildedRose(object):
 
     def _adjust_quality_if_past_due(self, item: Item) -> None:
         """Apply the extra adjustment once the item's sell-by date has passed."""
-        if item.sell_in < 0:
+        if self._is_past_sell_by_date(item):
             if item.name == AGED_BRIE:
                 if item.quality < MAX_QUALITY:
                     item.quality = item.quality + 1
@@ -64,6 +64,10 @@ class GildedRose(object):
                 item.quality = item.quality - item.quality
             elif item.quality > MIN_QUALITY:
                 item.quality = item.quality - 1
+
+    def _is_past_sell_by_date(self, item: Item) -> bool:
+        """Whether the item's sell_in has already gone negative."""
+        return item.sell_in < 0
 
 
 class Item:
