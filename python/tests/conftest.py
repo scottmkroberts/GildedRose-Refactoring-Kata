@@ -1,6 +1,7 @@
 import pytest
 
 from gilded_rose import Item
+from item_names import AGED_BRIE, BACKSTAGE_PASSES, SULFURAS
 
 
 @pytest.fixture
@@ -20,17 +21,17 @@ def vest_past_due():
 
 @pytest.fixture
 def aged_brie():
-    return Item(name="Aged Brie", sell_in=2, quality=0)
+    return Item(name=AGED_BRIE, sell_in=2, quality=0)
 
 
 @pytest.fixture
 def aged_brie_at_cap():
-    return Item(name="Aged Brie", sell_in=2, quality=50)
+    return Item(name=AGED_BRIE, sell_in=2, quality=50)
 
 
 @pytest.fixture
 def aged_brie_past_due():
-    return Item(name="Aged Brie", sell_in=0, quality=10)
+    return Item(name=AGED_BRIE, sell_in=0, quality=10)
 
 
 @pytest.fixture
@@ -45,61 +46,47 @@ def elixir_past_due_near_floor():
 
 @pytest.fixture
 def sulfuras_not_yet_due():
-    return Item(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=80)
+    return Item(name=SULFURAS, sell_in=0, quality=80)
 
 
 @pytest.fixture
 def sulfuras_past_due():
-    return Item(name="Sulfuras, Hand of Ragnaros", sell_in=-1, quality=80)
+    return Item(name=SULFURAS, sell_in=-1, quality=80)
 
 
 @pytest.fixture
 def backstage_pass_15_days():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=15, quality=20)
 
 
 @pytest.fixture
 def backstage_pass_10_days():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=10, quality=49)
 
 
 @pytest.fixture
 def backstage_pass_5_days():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=5, quality=49)
 
 
 @pytest.fixture
 def backstage_pass_10_days_with_room():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=20
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=10, quality=20)
 
 
 @pytest.fixture
 def backstage_pass_5_days_with_room():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=20
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=5, quality=20)
 
 
 @pytest.fixture
 def backstage_pass_day_of_concert():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=20
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=0, quality=20)
 
 
 @pytest.fixture
 def backstage_pass_after_concert():
-    return Item(
-        name="Backstage passes to a TAFKAL80ETC concert", sell_in=-1, quality=0
-    )
+    return Item(name=BACKSTAGE_PASSES, sell_in=-1, quality=0)
 
 
 @pytest.fixture
