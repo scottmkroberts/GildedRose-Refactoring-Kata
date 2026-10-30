@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
 
 
 class GildedRose(object):
-    def __init__(self, items):
+    """Manages day-to-day sell_in/quality updates for a list of Items."""
+
+    def __init__(self, items: list[Item]) -> None:
         self.items = items
 
-    def update_quality(self):
+    def update_quality(self) -> None:
+        """Advance every item by one day, applying the shop's quality rules."""
         for item in self.items:
             if (
                 item.name != "Aged Brie"
