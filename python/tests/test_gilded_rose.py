@@ -50,3 +50,23 @@ def test_aged_brie_quality_increases_as_it_ages(aged_brie):
 
     assert aged_brie.sell_in == sell_in_before - 1
     assert aged_brie.quality == quality_before + 1
+
+
+def test_quality_degrades_twice_as_fast_past_sell_by_date(vest_past_due):
+    quality_before = vest_past_due.quality
+
+    GildedRose([vest_past_due]).update_quality()
+
+    assert vest_past_due.quality == quality_before - 2
+
+
+def test_aged_brie_past_sell_by_date_currently_doubles_increase(aged_brie_past_due):
+    # Matches current gilded_rose.py behavior (not necessarily intended):
+    # the "twice as fast" past-due rule is applied symmetrically, so Brie's
+    # increase also doubles to +2/day instead of staying at +1/day. See
+    # dev notes re: possible spec ambiguity before changing this.
+    quality_before = aged_brie_past_due.quality
+
+    GildedRose([aged_brie_past_due]).update_quality()
+
+    assert aged_brie_past_due.quality == quality_before + 2
