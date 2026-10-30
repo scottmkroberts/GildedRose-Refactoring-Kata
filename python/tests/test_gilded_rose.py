@@ -41,3 +41,12 @@ def test_sell_in_and_quality_decrease_by_one_for_normal_items(vest, elixir):
     for item, (sell_in_before, quality_before) in zip(items, before):
         assert item.sell_in == sell_in_before - 1
         assert item.quality == quality_before - 1
+
+
+def test_aged_brie_quality_increases_as_it_ages(aged_brie):
+    sell_in_before, quality_before = aged_brie.sell_in, aged_brie.quality
+
+    GildedRose([aged_brie]).update_quality()
+
+    assert aged_brie.sell_in == sell_in_before - 1
+    assert aged_brie.quality == quality_before + 1
