@@ -1,7 +1,7 @@
 import pytest
 
 from gilded_rose import Item
-from item_names import AGED_BRIE, BACKSTAGE_PASSES, SULFURAS
+from item_names import AGED_BRIE, BACKSTAGE_PASSES, CONJURED, SULFURAS
 
 
 @pytest.fixture
@@ -91,7 +91,7 @@ def backstage_pass_after_concert():
 
 @pytest.fixture
 def conjured_mana_cake():
-    return Item(name="Conjured Mana Cake", sell_in=3, quality=6)
+    return Item(name=CONJURED, sell_in=3, quality=6)
 
 
 @pytest.fixture

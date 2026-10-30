@@ -120,3 +120,14 @@ def test_backstage_pass_quality_stays_zero_after_concert(backstage_pass_after_co
     GildedRose([backstage_pass_after_concert]).update_quality()
 
     assert backstage_pass_after_concert.quality == 0
+
+
+def test_conjured_items_degrade_twice_as_fast(conjured_mana_cake):
+    # Not yet implemented: gilded_rose.py currently has no special case for
+    # Conjured items, so this fails (-1/day like a normal item) until that
+    # rule is added.
+    quality_before = conjured_mana_cake.quality
+
+    GildedRose([conjured_mana_cake]).update_quality()
+
+    assert conjured_mana_cake.quality == quality_before - 2
