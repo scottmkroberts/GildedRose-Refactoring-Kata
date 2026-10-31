@@ -69,8 +69,10 @@ class GildedRose(object):
                 item.quality = min(MAX_QUALITY, item.quality + 1)
             elif item.name == BACKSTAGE_PASSES:
                 item.quality = 0
-            elif item.quality > MIN_QUALITY:
-                item.quality -= 1
+            else:
+                item.quality = max(
+                    MIN_QUALITY, item.quality - self._degrade_amount(item)
+                )
 
     def _is_past_sell_by_date(self, item: Item) -> bool:
         """Whether the item's sell_in has already gone negative."""
