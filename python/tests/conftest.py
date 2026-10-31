@@ -90,6 +90,11 @@ def backstage_pass_after_concert():
 
 
 @pytest.fixture
+def conjured_sword():
+    return Item("Conjured Sword", sell_in=5, quality=10)
+
+
+@pytest.fixture
 def conjured_mana_cake():
     return Item(name=CONJURED, sell_in=3, quality=6)
 

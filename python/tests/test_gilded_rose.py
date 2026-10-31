@@ -124,12 +124,14 @@ def test_backstage_pass_quality_stays_zero_after_concert(backstage_pass_after_co
     assert backstage_pass_after_concert.quality == 0
 
 
-def test_conjured_items_degrade_twice_as_fast(conjured_mana_cake):
-    quality_before = conjured_mana_cake.quality
+def test_any_conjured_item_degrades_twice_as_fast(conjured_mana_cake, conjured_sword):
+    mana_cake_quality_before = conjured_mana_cake.quality
+    sword_quality_before = conjured_sword.quality
 
-    GildedRose([conjured_mana_cake]).update_quality()
+    GildedRose([conjured_mana_cake, conjured_sword]).update_quality()
 
-    assert conjured_mana_cake.quality == quality_before - 2
+    assert conjured_mana_cake.quality == mana_cake_quality_before - 2
+    assert conjured_sword.quality == sword_quality_before - 2
 
 
 def test_conjured_items_degrade_four_times_as_fast_when_past_due(
