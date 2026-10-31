@@ -31,8 +31,10 @@ def test_sulfuras_never_sold_or_decreases_in_quality(
         assert item.quality == quality_before == 80
 
 
-def test_quality_never_negative(vest_at_floor, elixir_past_due_near_floor):
-    items = [vest_at_floor, elixir_past_due_near_floor]
+def test_quality_never_negative(
+    vest_at_floor, elixir_past_due_near_floor, conjured_past_due_near_floor
+):
+    items = [vest_at_floor, elixir_past_due_near_floor, conjured_past_due_near_floor]
     GildedRose(items).update_quality()
     for item in items:
         assert item.quality >= 0
@@ -128,6 +130,16 @@ def test_conjured_items_degrade_twice_as_fast(conjured_mana_cake):
     GildedRose([conjured_mana_cake]).update_quality()
 
     assert conjured_mana_cake.quality == quality_before - 2
+
+
+def test_conjured_items_degrade_four_times_as_fast_when_past_due(
+    conjured_mana_cake_past_due,
+):
+    quality_before = conjured_mana_cake_past_due.quality
+
+    GildedRose([conjured_mana_cake_past_due]).update_quality()
+
+    assert conjured_mana_cake_past_due.quality == quality_before - 4
 
 
 def test_unknown_item_degrades_like_a_normal_item(unknown_item):

@@ -95,6 +95,21 @@ def conjured_mana_cake():
 
 
 @pytest.fixture
+def conjured_mana_cake_past_due():
+    return Item(name=CONJURED, sell_in=-1, quality=6)
+
+
+@pytest.fixture
+def conjured_mana_cake_due():
+    return Item(name=CONJURED, sell_in=0, quality=3)
+
+
+@pytest.fixture
+def conjured_past_due_near_floor():
+    return Item(name=CONJURED, sell_in=0, quality=3)
+
+
+@pytest.fixture
 def unknown_item():
     return Item(name="Unknown Item", sell_in=5, quality=10)
 
