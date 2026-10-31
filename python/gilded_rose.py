@@ -4,7 +4,7 @@ from __future__ import annotations
 from item_names import (
     AGED_BRIE,
     BACKSTAGE_PASSES,
-    CONJURED,
+    CONJURED_PREFIX,
     INCREASING_QUALITY_ITEMS,
     LEGENDARY_ITEMS,
 )
@@ -44,7 +44,7 @@ class GildedRose(object):
 
     def _degrade_amount(self, item: Item) -> int:
         """How much quality should degrade today for a non-appreciating item."""
-        if item.name == CONJURED:
+        if self._is_conjured(item):
             return CONJURED_DEGRADE_AMOUNT
         return NORMAL_DEGRADE_AMOUNT
 
@@ -77,6 +77,10 @@ class GildedRose(object):
     def _is_past_sell_by_date(self, item: Item) -> bool:
         """Whether the item's sell_in has already gone negative."""
         return item.sell_in < 0
+
+    def _is_conjured(self, item: Item) -> bool:
+        """Whether the item belongs to the Conjured category (name starts with "Conjured")."""
+        return item.name.startswith(CONJURED_PREFIX)
 
 
 class Item:

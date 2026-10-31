@@ -1,7 +1,7 @@
 import pytest
 
 from gilded_rose import Item
-from item_names import AGED_BRIE, BACKSTAGE_PASSES, CONJURED, SULFURAS
+from item_names import AGED_BRIE, BACKSTAGE_PASSES, SULFURAS
 
 
 @pytest.fixture
@@ -96,22 +96,22 @@ def conjured_sword():
 
 @pytest.fixture
 def conjured_mana_cake():
-    return Item(name=CONJURED, sell_in=3, quality=6)
+    return Item(name="Conjured Mana Cake", sell_in=3, quality=6)
 
 
 @pytest.fixture
 def conjured_mana_cake_past_due():
-    return Item(name=CONJURED, sell_in=-1, quality=6)
+    return Item(name="Conjured Mana Cake", sell_in=-1, quality=6)
 
 
 @pytest.fixture
 def conjured_mana_cake_due():
-    return Item(name=CONJURED, sell_in=0, quality=3)
+    return Item(name="Conjured Mana Cake", sell_in=0, quality=3)
 
 
 @pytest.fixture
 def conjured_past_due_near_floor():
-    return Item(name=CONJURED, sell_in=0, quality=3)
+    return Item(name="Conjured Mana Cake", sell_in=0, quality=3)
 
 
 @pytest.fixture
