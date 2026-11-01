@@ -5,6 +5,7 @@ from gilded_rose import *
 
 
 def main():
+    print("OMGHAI!")
     items = [
         Item(name="+5 Dexterity Vest", sell_in=10, quality=20),
         Item(name="Aged Brie", sell_in=2, quality=0),
